@@ -51,7 +51,7 @@ public class TaskService : ITaskService
         task.Description = request.Description;
         task.Status = request.Status;
         task.Priority = request.Priority;
-        task.DueDate = request.DueDate;
+        task.DueDate = DateTime.SpecifyKind((DateTime)request.DueDate, DateTimeKind.Utc);
 
         var updated = await _taskRepository.UpdateAsync(task);
         return MapToResponse(updated);
